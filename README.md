@@ -11,7 +11,26 @@ Your task will be to 'fix' this broken application, when it runs successfully yo
 * Click the 'admin' profile option in the top left hand portion of the screen
 * Select 'Configure Client', copy the instructions and paste into the terminal window.
 
+### Run
+
+To build and run the application with Maven:
+1. `mvn install`
+1. `mvn liberty:run-server`
+
+
+To run the application in Docker use the Docker file called `Dockerfile`. If you do not want to install Maven locally you can use `Dockerfile-tools` to build a container with Maven installed.
+
+### Endpoints
+
+The application exposes the following endpoints:
+* Health endpoint: `<host>:<port>/j12017escape/health`
+* Cloudant example endpoint: `<host>:<port>/j12017escape/v1/example/cloudant`
+
+The context root is set in the `src/main/webapp/WEB-INF/ibm-web-ext.xml` file. The ports are set in the pom.xml file and exposed to the CLI in the cli-config.yml file.
+
 ## Other useful information
+* Log into the private docker registry: `docker login master.cfc:8500`
+  admin/admin
 * Build app with `bx dev build`
 * Deploy to local Kubernetes with `bx dev deploy`
 
@@ -32,22 +51,7 @@ This microservice application is configured to connect to the following services
 
 Credentials are either taken from the VCAP_SERVICES environment variable that Bluemix provides or from environment variables passed in by JNDI (see the server config file `src/main/liberty/config/server.xml`).
 
-### Run
 
-To build and run the application:
-1. `mvn install`
-1. `mvn liberty:run-server`
-
-
-To run the application in Docker use the Docker file called `Dockerfile`. If you do not want to install Maven locally you can use `Dockerfile-tools` to build a container with Maven installed.
-
-### Endpoints
-
-The application exposes the following endpoints:
-* Health endpoint: `<host>:<port>/<contextRoot>/health`
-* Cloudant example endpoint: `<host>:<port>/<contextRoot>/v1/example/cloudant`
-
-The context root is set in the `src/main/webapp/WEB-INF/ibm-web-ext.xml` file. The ports are set in the pom.xml file and exposed to the CLI in the cli-config.yml file.
 
 ### Notices
 
